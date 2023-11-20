@@ -11,32 +11,32 @@ const App = () => {
   const [cart, setCart] = useState([]);
 
   const addToCart = (product) => {
-    // Check if the product is already in the cart
+    // ตรวจสอบว่าสินค้าอยู่ในตะกร้าแล้วหรือไม่
     const existingProduct = cart.find(item => item.id === product.id);
 
     if (existingProduct) {
-      // If the product is already in the cart, update its quantity
+      // หากสินค้าอยู่ในตะกร้าแล้ว ให้อัปเดตจำนวน
       setCart(cart.map(item =>
         item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
       ));
     } else {
-      // If the product is not in the cart, add it with quantity 1
+      // หากสินค้าไม่อยู่ในตะกร้า ให้เพิ่มจำนวน 1
       setCart([...cart, { ...product, quantity: 1 }]);
     }
   };
-
+//ลบสินค้าในตะกร้า
   const removeFromCart = (productId) => {
     const updatedCart = cart.filter(item => item.id !== productId);
     setCart(updatedCart);
   };
-
+//เพิ่มปริมาณในตะกร้า
   const increaseQuantity = (productId) => {
     const updatedCart = cart.map(item =>
       item.id === productId ? { ...item, quantity: item.quantity + 1 } : item
     );
     setCart(updatedCart);
   };
-
+//ลดปริมาณในตะกร้า
   const decreaseQuantity = (productId) => {
     const updatedCart = cart.map(item =>
       item.id === productId ? { ...item, quantity: Math.max(item.quantity - 1, 1) } : item
